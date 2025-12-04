@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { useVoiceAssistant } from '@livekit/components-react';
-import { PhoneDisconnectIcon, XIcon } from '@phosphor-icons/react';
+import { PhoneDisconnectIcon, PhoneIcon, XIcon } from '@phosphor-icons/react';
 import { EmbedErrorDetails } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
@@ -72,20 +72,13 @@ export function Trigger({ error = null, popupOpen, onToggle }: TriggerProps) {
           <AnimatePresence>
             {!popupOpen && (
               <motion.div
-                key="lk-logo"
+                key="phone-icon"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: popupOpen ? 20 : -20 }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
               >
-                <div
-                  className="bg-bg1 size-5"
-                  // webpack build throws if I use custom tailwind classes to achive this
-                  style={{
-                    maskImage: 'url(/lk-logo.svg)',
-                    maskSize: 'contain',
-                  }}
-                />
+                <PhoneIcon size={20} weight="bold" className="text-bg1 size-5" />
               </motion.div>
             )}
             {(isAgentConnecting || (error && popupOpen)) && (
